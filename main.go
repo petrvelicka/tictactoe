@@ -4,8 +4,10 @@ import (
 	"errors"
 	"fmt"
 	"github.com/inancgumus/screen"
+	"math/rand"
 )
 
+var computer = []bool{false, false, false}
 var symbols = []string{" ", "✕", "◯"}
 var lines = []string{"A", "B", "C"}
 
@@ -130,16 +132,28 @@ func play() {
 		fmt.Printf("Now plays player %v\n", plays)
 		printField(field)
 
-		for {
-			input, err := getInput()
-			if err != nil {
-				fmt.Println("Error: " + err.Error())
-			} else {
-				if field[input[0]][input[1]] == 0 {
-					field[input[0]][input[1]] = plays
-					break
+		if !computer[plays] {
+			for {
+				input, err := getInput()
+				if err != nil {
+					fmt.Println("Error: " + err.Error())
 				} else {
-					fmt.Println("Error: field is not available")
+					if field[input[0]][input[1]] == 0 {
+						field[input[0]][input[1]] = plays
+						break
+					} else {
+						fmt.Println("Error: field is not available")
+					}
+				}
+			}
+		} else {
+			for {
+				x := rand.Intn(3)
+				y := rand.Intn(3)
+
+				if field[x][y] == 0 {
+					field[x][y] = plays
+					break
 				}
 			}
 		}
@@ -157,6 +171,12 @@ func play() {
 
 func welcome() {
 	fmt.Println("Welcome to TicTacToe")
+	fmt.Print("Do you want to play with a computer (Y/n)? ")
+	var line string
+	_, _ = fmt.Scanln(&line)
+	if line == "y" {
+		computer[2] = true
+	}
 }
 
 func main() {
