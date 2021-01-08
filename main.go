@@ -8,7 +8,7 @@ import (
 )
 
 var computer = []bool{false, false, false}
-var symbols = []string{" ", "✕", "◯"}
+var symbols = []string{" ", "✕", "○"}
 var lines = []string{"A", "B", "C"}
 
 // printField prints game field
