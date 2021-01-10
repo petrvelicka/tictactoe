@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/inancgumus/screen"
 	"math/rand"
+	"time"
 )
 
 var computer = []bool{false, false, false}
@@ -175,6 +176,7 @@ func welcome() {
 	var line string
 	_, _ = fmt.Scanln(&line)
 	if line == "y" {
+		rand.Seed(time.Now().UnixNano())
 		computer[2] = true
 	}
 }
